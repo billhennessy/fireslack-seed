@@ -1,15 +1,19 @@
 <div class="page-wrapper">
 
   <div class="page-header">
-    <h1><a ui-sref="home"><img class="logo-img" src="images/logo.png" /></a> Register</h1>
+    <h1><a ui-sref="home"><img class="logo-img" src="images/marketing64.png" /></a> Register</h1>
   </div>
-
-  <form>
+  <!-- <div ng-show="authCtrl.error">
+    <span>{{ authCtrl.error.message }}</span>
+  </div> -->
+  <div ng-show="authCtrl.error" class="alert alert-danger">{{ authCtrl.error.message }}
+  </div>
+  <form ng-submit='authCtrl.register()'>
     <div class="input-group">
-      <input type="email" class="form-control" placeholder="Email">
+      <input type="email" ng-model="authCtrl.user.email" class="form-control" placeholder="Email">
     </div>
     <div class="input-group">
-      <input type="password" class="form-control" placeholder="Password">
+      <input type="password" ng-model="authCtrl.user.password" class="form-control" placeholder="Password">
     </div>
     <input type="submit" class="btn btn-default" value="Register">
   </form>
