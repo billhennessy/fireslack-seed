@@ -1,45 +1,42 @@
 'use strict';
 
 //angular.module('angularfireSlackApp')
-app.factory('Channels', ['$firebaseArray', 'FirebaseUrl',
+app.factory('Tiles', ['$firebaseArray', 'FirebaseUrl',
   function($firebaseArray, FirebaseUrl){
-  var ref = new Firebase(FirebaseUrl+'channels');
-  var channels = $firebaseArray(ref);
-  return channels;
+  var ref = new Firebase(FirebaseUrl+'tiles');
+  var tiles = $firebaseArray(ref);
+  return tiles;
 }])
 
-app.controller('ChannelsCtrl', ['$state', 'Auth', 'Users', 'Messages', 'profile', 'channels',
-  function($state, Auth, Users, Messages, profile, channels){
-  var channelsCtrl = this;
-   channelsCtrl.profile = profile;
-   channelsCtrl.channels = channels;
-   channelsCtrl.users = Users.all;
+app.controller('TilesCtrl', ['$state', 'Auth', 'Users','profile', 'tiles',
+  function($state, Auth, Users, profile, tiles){
+  var tilesCtrl = this;
+   tilesCtrl.profile = profile;
+   tilesCtrl.tiles = tiles;
+   tilesCtrl.users = Users.all;
 
   Users.setOnline(profile.$id);
 
-  channelsCtrl.getDisplayName = Users.getDisplayName;
-  channelsCtrl.getGravatar = Users.getGravatar;
-  channelsCtrl.getMessageCounts = function(channelId){
-    return Messages.forChannel(channelId).length;
-  }
+  tilesCtrl.getDisplayName = Users.getDisplayName;
+  tilesCtrl.getGravatar = Users.getGravatar;
 
-  channelsCtrl.logout = function(){
-    channelsCtrl.profile.online = null;
+  tilesCtrl.logout = function(){
+    tilesCtrl.profile.online = null;
     console.log('logging out');
-    channelsCtrl.profile.$save().then(function(){
+    tilesCtrl.profile.$save().then(function(){
       Auth.$unauth();
       $state.go('home');
     })
 
   };
 
-channelsCtrl.newChannel = {
+tilesCtrl.newTile = {
   name: ''
 };
 
-channelsCtrl.createChannel = function() {
-  channelsCtrl.channels.$add(channelsCtrl.newChannel).then(function(ref){
-    $state.go('channels.messages', {channelId: ref.key()});
+tilesCtrl.createChannel = function() {
+  tilesCtrl.tiles.$add(tilesCtrl.newTile).then(function(ref){
+    $state.go('tiles.messages', {tileId: ref.key()});
   })
   }
 

@@ -1,0 +1,39 @@
+  <div class="container-fluid">
+  <div class="row">
+            <!--
+            <div class="col-md-3">
+              <h5>Triggering layout</h5>
+              A layout can be triggered at any time, for example when resizing a card. A callback will be fired once the animations have completed.
+            </div>
+          -->
+            <div class="col-md-4">
+              <h5>Filtering</h5>
+              <div class="btn-group" role="group">
+                  <button class="btn btn-default" ng-class="{active: gridContainer.isTabActive('home')}" ng-click="gridContainer.filter('home')">Show all</button>
+                  <button class="btn btn-default" ng-class="{active: gridContainer.isTabActive('work')}" ng-click="gridContainer.filter('work')">Experience</button>
+                  <button class="btn btn-default" ng-class="{active: gridContainer.isTabActive('education')}" ng-click="gridContainer.filter('education')">Education</button>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <h5>Sorting</h5>
+              <div class="btn-group" role="group">
+                  <button class="btn btn-default"ng-class="{active: gridContainer.rankers === null}"   ng-click="gridContainer.rankers = null">Original order</button>
+                  <button class="btn btn-default" ng-class="{active: gridContainer.isRankerActive('added')}"  ng-click="orderBy('added')">Time created</button>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <h5>Adding and removing items</h5>
+              <div class="btn-group" role="group">
+                <button class="btn btn-default" ng-click="gridContainer.addCard()">
+                  <span class="glyphicon glyphicon-plus"></span>
+                </button>
+                <button class="btn btn-default" ng-click="gridContainer.removeFirstCard()">
+                  <span class="glyphicon glyphicon-minus"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        <div dynamic-layout items="gridContainer.cards" filters="gridContainer.filters" rankers="gridContainer.rankers"></div>
+
+</div>

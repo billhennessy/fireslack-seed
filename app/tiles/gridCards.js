@@ -1,50 +1,6 @@
 'use strict';
 
-//angular.module('angularfireSlackApp')
-app.factory('Channels', ['$firebaseArray', 'FirebaseUrl',
-  function($firebaseArray, FirebaseUrl){
-  var ref = new Firebase(FirebaseUrl+'channels');
-  var channels = $firebaseArray(ref);
-  return channels;
-}])
 
-app.controller('ChannelsCtrl', ['$state', 'Auth', 'Users', 'Messages', 'profile', 'channels',
-  function($state, Auth, Users, Messages, profile, channels){
-  var channelsCtrl = this;
-   channelsCtrl.profile = profile;
-   channelsCtrl.channels = channels;
-   channelsCtrl.users = Users.all;
-
-  Users.setOnline(profile.$id);
-
-  channelsCtrl.getDisplayName = Users.getDisplayName;
-  channelsCtrl.getGravatar = Users.getGravatar;
-  channelsCtrl.getMessageCounts = function(channelId){
-    return Messages.forChannel(channelId).length;
-  }
-
-  channelsCtrl.logout = function(){
-    channelsCtrl.profile.online = null;
-    console.log('logging out');
-    channelsCtrl.profile.$save().then(function(){
-      Auth.$unauth();
-      $state.go('home');
-    })
-
-  };
-
-channelsCtrl.newChannel = {
-  name: ''
-};
-
-channelsCtrl.createChannel = function() {
-  channelsCtrl.channels.$add(channelsCtrl.newChannel).then(function(ref){
-    $state.go('channels.messages', {channelId: ref.key()});
-  })
-  }
-
-
-}]);
 
 app.controller('Work1Controller', ['$scope', '$rootScope', '$timeout',
   function($scope, $rootScope, $timeout) {
@@ -69,7 +25,7 @@ app.controller('Work1Controller', ['$scope', '$rootScope', '$timeout',
  * rankers
  */
 app.controller('GridContainer',
-  ['$state', 'channels',  function ($state, channels) {
+  ['$state',  function ($state) {
       var gridContainer = this;
       gridContainer.filters = [[['tabs', 'contains', 'home']]];
       gridContainer.rankers = null;

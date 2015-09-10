@@ -18,11 +18,15 @@
     <div class="input-group">
       <input type="text" class="form-control" placeholder="Last Name" ng-model="profileCtrl.profile.lastName">
     </div>
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="State" ng-model="profileCtrl.profile.state">
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" disabled ng-model="profileCtrl.profile.admin"> Admin
+      </label>
     </div>
     <input type="submit" class="btn btn-default" value="Save Profile">
     <button ng-show="profileCtrl.profile.displayName" class="btn btn-default" ng-click="state.go('home')">Cancel</button>
   </form>
+<button class="btn btn-link">Change Password</button>
+
 
 </div>

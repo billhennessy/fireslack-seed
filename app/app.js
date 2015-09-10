@@ -147,9 +147,30 @@ var app = angular.module('angularfireSlackApp', [
         url: '/cards',
         templateUrl: 'channels/cards.html',
         controller: 'GridContainer as gridContainer'
-
-
-  });
+      })
+      .state('tiles', {
+        url: '/tiles',
+        controller: 'TilesCtrl as tilesCtrl',
+        templateUrl: 'tiles/index.html',
+        resolve: {
+          tiles: function(Tiles){
+            return Tiles.$loaded();
+          },
+          profile: function ($state, Auth, Users){
+            return Auth.$requireAuth().then(function(auth){
+              return Users.getProfile(auth.uid).$loaded().then(function(profile){
+                if(profile.displayName){
+                  return profile;
+                } else {
+                  $state.go('profile');
+                }
+              });
+            }, function(error){
+              $state.go('home');
+            });
+          }
+        }
+      });
 
     $urlRouterProvider.otherwise('/');
   })

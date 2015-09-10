@@ -23,7 +23,6 @@
    var messagesCtrl = this;
    messagesCtrl.user = Users;
    messagesCtrl.messages = messages;
-   messagesCtrl.count = messages.length;
    messagesCtrl.channelName = channelName;
    messagesCtrl.message = '';
 

@@ -7,7 +7,6 @@
       <div class="list-head"><img class="logo-img pull-right" src="images/transmission4.png" /> Channels</div>
       <div class="channel clearfix" ng-repeat="channel in channelsCtrl.channels">
         <a ui-sref="channels.messages({channelId: channel.$id})" ui-sref-active="selected"># {{ channel.name }}</a>
-        
       </div>
       <div class="channel create">
         <a ui-sref="channels.create">+ create channel</a>
